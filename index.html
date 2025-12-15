@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Soukaina Jouah | Portfolio</title>
+
+  <style>
+    /* ================= VARIABLES ================= */
+    :root {
+      --pink-primary: #ec4899;
+      --pink-secondary: #f9a8d4;
+      --pink-dark: #be185d;
+      --white: #ffffff;
+      --bg-light: #fff5fa;
+    }
+
+    /* ================= GLOBAL ================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg-light);
+      color: #333;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    section { padding: 100px 20px; max-width: 1100px; margin: auto; opacity: 0; transform: translateY(40px); transition: 0.8s ease; }
+    section.show { opacity: 1; transform: translateY(0); }
+
+    h2 { text-align: center; margin-bottom: 20px; color: var(--pink-primary); }
+
+    /* ================= NAVBAR ================= */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--white);
+      z-index: 1000;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav h2 { color: var(--pink-primary); }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      font-weight: 500;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 2px;
+      background: var(--pink-primary);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+
+    .menu-btn { display: none; font-size: 24px; cursor: pointer; }
+
+    /* ================= HERO ================= */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ffb6d9, #ec4899);
+      color: white;
+    }
+
+    .hero-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 50px;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-text h1 { font-size: 3.5rem; margin-bottom: 15px; }
+    .hero-text h3 { margin-bottom: 15px; }
+    .hero-text p { max-width: 600px; margin-bottom: 25px; }
+
+    /* BUTTON */
+    .btn {
+      display: inline-block;
+      padding: 14px 35px;
+      border-radius: 30px;
+      background: white;
+      color: var(--pink-dark);
+      font-weight: bold;
+      transition: 0.3s;
+      animation: pulse 2s infinite;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background: var(--pink-secondary);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(255,255,255,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+    }
+
+    /* PROFILE IMAGE - LARGER */
+    .hero-image { flex: 1; display: flex; justify-content: center; }
+    .hero-image img {
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid white;
+      box-shadow: 0 25px 60px rgba(236, 72, 153, 0.5);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* ================= ABOUT ================= */
+    #about p { text-align: center; max-width: 700px; margin: auto; margin-bottom: 20px; }
+
+    /* ================= SKILLS ================= */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
+    .skill {
+      background: white; padding: 20px; border-radius: 15px;
+      text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      transition: 0.3s;
+    }
+    .skill:hover { transform: translateY(-8px); border: 2px solid var(--pink-primary); }
+    .bar { height: 6px; background: #eee; border-radius: 5px; margin-top: 10px; overflow: hidden; }
+    .bar span { display: block; height: 100%; width: 0; background: var(--pink-primary); transition: 1.5s; }
+
+    /* ================= PROJECTS ================= */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+    .project {
+      background: white; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08); transition: 0.4s;
+    }
+    .project:hover { transform: scale(1.05); box-shadow: 0 25px 60px rgba(236,72,153,0.35); }
+    .project-img { height: 150px; background: linear-gradient(135deg, #f9a8d4, #ec4899); }
+    .project-content { padding: 15px; }
+
+    /* ================= CONTACT ================= */
+    form {
+      max-width: 500px; margin: auto;
+      display: flex; flex-direction: column; gap: 15px;
+    }
+    input, textarea { padding: 12px; border-radius: 10px; border: 1px solid #ddd; }
+    button {
+      padding: 14px; border: none; border-radius: 30px;
+      background: var(--pink-primary); color: white; font-size: 16px;
+      cursor: pointer; transition: 0.3s;
+    }
+    button:hover { background: var(--pink-dark); transform: scale(1.05); }
+
+    /* ================= MOBILE ================= */
+    @media(max-width: 1024px) {
+      .hero-container { flex-direction: column; text-align: center; gap: 30px; }
+      .hero-image img { width: 300px; height: 300px; }
+    }
+    @media(max-width: 768px) {
+      .hero-image img { width: 260px; height: 260px; }
+      .nav-links {
+        position: fixed; top: 70px; right: -100%;
+        flex-direction: column; background: white;
+        width: 200px; padding: 20px; transition: 0.4s;
+      }
+      .nav-links.open { right: 0; }
+      .menu-btn { display: block; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<header>
+  <nav>
+    <h2>Soukaina</h2>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Project</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section id="home" class="show">
+  <div class="hero-container">
+    <div class="hero-text">
+      <h1 id="typewriter"></h1>
+      <h3>Mobile and Web Developer</h3>
+      <p>I build modern, responsive and animated web & mobile applications.</p>
+      <a href="#contact" class="btn">Let's Talk</a>
+    </div>
+    <div class="hero-image">
+      <img src="portfolio.jpeg" alt="Soukaina Jouah">
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <h2>About Me</h2>
+  <p>I am Soukaina Jouah, a passionate Mobile and Web Developer who loves creating clean UI, smooth animations, and useful digital experiences.</p>
+  <div style="text-align:center;">
+    <a href="#contact" class="btn">Hire Me</a>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <h2>My Skills</h2>
+  <div class="skills-grid">
+    <div class="skill">HTML<div class="bar"><span data-width="90%"></span></div></div>
+    <div class="skill">CSS<div class="bar"><span data-width="85%"></span></div></div>
+    <div class="skill">JavaScript<div class="bar"><span data-width="80%"></span></div></div>
+    <div class="skill">React<div class="bar"><span data-width="75%"></span></div></div>
+    <div class="skill">Node.js<div class="bar"><span data-width="70%"></span></div></div>
+    <div class="skill">Flutter<div class="bar"><span data-width="75%"></span></div></div>
+    <div class="skill">Figma<div class="bar"><span data-width="65%"></span></div></div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <h2>My Projects</h2>
+  <div class="projects-grid">
+    <div class="project">
+      <div class="project-img"></div>
+      <div class="project-content">
+        <h4>Project One</h4>
+        <p>Mobile & web application with modern UI.</p>
+      </div>
+    </div>
+    <div class="project">
+      <div class="project-img"></div>
+      <div class="project-content">
+        <h4>Project Two</h4>
+        <p>Responsive platform using React.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <h2>Contact Me</h2>
+  <form onsubmit="return validateForm()">
+    <input type="text" id="name" placeholder="Name">
+    <input type="email" id="email" placeholder="Email">
+    <textarea id="message" rows="4" placeholder="Message"></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<script>
+  /* TYPEWRITER */
+  const text = "HELLO! I'm Soukaina Jouah";
+  let i = 0;
+  function typeWriter() {
+    if (i < text.length) {
+      document.getElementById("typewriter").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 80);
+    }
+  }
+  typeWriter();
+
+  /* SCROLL ANIMATION */
+  const sections = document.querySelectorAll("section");
+  window.addEventListener("scroll", () => {
+    sections.forEach(sec => {
+      const top = sec.getBoundingClientRect().top;
+      if (top < window.innerHeight - 100) sec.classList.add("show");
+    });
+
+    document.querySelectorAll(".bar span").forEach(bar => {
+      bar.style.width = bar.dataset.width;
+    });
+  });
+
+  /* MENU TOGGLE */
+  function toggleMenu() { document.getElementById("navLinks").classList.toggle("open"); }
+
+  /* FORM VALIDATION */
+  function validateForm() {
+    if (!name.value || !email.value || !message.value) { alert("Please fill all fields"); return false; }
+    alert("Message sent successfully!");
+    return false;
+  }
+</script>
+
+</body>
+</html>
