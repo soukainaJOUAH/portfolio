@@ -553,12 +553,90 @@
       .btn { padding: 12px 24px; }
       .skills-grid { grid-template-columns: repeat(2, 1fr); }
     }
+    /* Animation pour le spinner */
+.fa-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Animation pour les messages */
+.success-message, .error-message {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
   </style>
   
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
+<script>
+  // Initialise EmailJS avec VOS codes
+  (function() {
+    emailjs.init("f33xJDi-omF0R96bo"); // VOTRE Public Key
+  })();
+  
+  // Gestion du formulaire
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    const formMessage = document.getElementById('form-message');
+    const formError = document.getElementById('form-error');
+    
+    // Masquer les messages précédents
+    formMessage.style.display = 'none';
+    formError.style.display = 'none';
+    
+    // Changer le bouton pendant l'envoi
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    submitBtn.disabled = true;
+    
+    // Envoyer l'email via EmailJS
+    emailjs.sendForm(
+      'service_378stak',      // VOTRE Service ID
+      'template_1n3sarv',     // VOTRE Template ID
+      this
+    )
+    .then(function() {
+      // SUCCÈS
+      submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent!';
+      formMessage.style.display = 'block';
+      
+      // Réinitialiser le formulaire après 4 secondes
+      setTimeout(() => {
+        document.getElementById('contact-form').reset();
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        formMessage.style.display = 'none';
+      }, 4000);
+    })
+    .catch(function(error) {
+      // ERREUR
+      submitBtn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error';
+      formError.style.display = 'block';
+      console.error('EmailJS Error:', error);
+      
+      // Réactiver le bouton après 3 secondes
+      setTimeout(() => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        formError.style.display = 'none';
+      }, 3000);
+    });
+  });
+</script>
 <body>
   <!-- NAVBAR -->
   <header>
@@ -761,22 +839,29 @@
   </section>
 
   <!-- CONTACT SECTION -->
-  <section id="contact">
-    <div class="container">
-      <h2>Contact Me</h2>
-      <form action="https://formspree.io/f/mvgengjz" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <input type="text" name="subject" placeholder="Subject">
-        <textarea name="message" placeholder="Your Message" required></textarea>
-        <button type="submit" class="btn btn-primary">
-          <i class="fas fa-paper-plane"></i> Send Message
-        </button>
-      </form>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
+<section id="contact">
+  <div class="container">
+    <h2>Contact Me</h2>
+    <form id="contact-form">
+      <input type="text" name="from_name" placeholder="Your Name" required>
+      <input type="email" name="from_email" placeholder="Your Email" required>
+      <input type="text" name="subject" placeholder="Subject (Optional)">
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-paper-plane"></i> Send Message
+      </button>
+      
+      <!-- Message de confirmation -->
+      <div id="form-message" class="success-message" style="display: none; margin-top: 20px; padding: 15px; background: rgba(46, 204, 113, 0.1); color: #27ae60; border-radius: 10px; text-align: center;">
+        <i class="fas fa-check-circle"></i> Message sent successfully! I'll respond soon.
+      </div>
+      
+      <div id="form-error" class="error-message" style="display: none; margin-top: 20px; padding: 15px; background: rgba(231, 76, 60, 0.1); color: #c0392b; border-radius: 10px; text-align: center;">
+        <i class="fas fa-exclamation-circle"></i> Error sending message. Please try again or email me directly.
+      </div>
+    </form>
+  </div>
+</section>
   <footer>
     <div class="container">
       <div class="logo" style="justify-content: center; margin-bottom: 20px;">
