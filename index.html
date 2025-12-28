@@ -21,15 +21,15 @@
     }
 
     .dark-mode {
-      --pink-primary: #ff6bb5;
-      --pink-secondary: #d14d8c;
-      --pink-dark: #ff2d75;
-      --white: #121212;
-      --bg-light: #1a1a1a;
-      --text-dark: #f0f0f0;
-      --card-bg: #252525;
-      --shadow: rgba(0, 0, 0, 0.3);
-    }
+  --pink-primary: #ff6bb5;
+  --pink-secondary: #d14d8c;
+  --pink-dark: #ff4081; /* PLUS CLAIRE pour mode sombre */
+  --white: #121212;
+  --bg-light: #1a1a1a;
+  --text-dark: #f0f0f0;
+  --card-bg: #252525;
+  --shadow: rgba(0, 0, 0, 0.3);
+}
 
     /* ================= GLOBAL ================= */
     * {
@@ -417,14 +417,22 @@
       margin-top: 15px;
     }
     
-    .tech-tag {
-      background: var(--pink-secondary);
-      color: var(--pink-dark);
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
+   .tech-tag {
+  background: rgba(236, 72, 153, 0.15);
+  color: var(--pink-dark);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid rgba(236, 72, 153, 0.3);
+  transition: var(--transition);
+}
+
+.dark-mode .tech-tag {
+  background: rgba(255, 107, 181, 0.2);
+  color: #ff8ab8; /* Couleur plus claire pour mode sombre */
+  border: 1px solid rgba(255, 107, 181, 0.4);
+}
 
     /* ================= CONTACT SECTION ================= */
     form { 
