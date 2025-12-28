@@ -21,15 +21,15 @@
     }
 
     .dark-mode {
-  --pink-primary: #ff6bb5;
-  --pink-secondary: #d14d8c;
-  --pink-dark: #ff4081; /* PLUS CLAIRE pour mode sombre */
-  --white: #121212;
-  --bg-light: #1a1a1a;
-  --text-dark: #f0f0f0;
-  --card-bg: #252525;
-  --shadow: rgba(0, 0, 0, 0.3);
-}
+      --pink-primary: #ff6bb5;
+      --pink-secondary: #d14d8c;
+      --pink-dark: #ff4081;
+      --white: #121212;
+      --bg-light: #1a1a1a;
+      --text-dark: #f0f0f0;
+      --card-bg: #252525;
+      --shadow: rgba(0, 0, 0, 0.3);
+    }
 
     /* ================= GLOBAL ================= */
     * {
@@ -417,22 +417,22 @@
       margin-top: 15px;
     }
     
-   .tech-tag {
-  background: rgba(236, 72, 153, 0.15);
-  color: var(--pink-dark);
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  border: 1px solid rgba(236, 72, 153, 0.3);
-  transition: var(--transition);
-}
+    .tech-tag {
+      background: rgba(236, 72, 153, 0.15);
+      color: var(--pink-dark);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1px solid rgba(236, 72, 153, 0.3);
+      transition: var(--transition);
+    }
 
-.dark-mode .tech-tag {
-  background: rgba(255, 107, 181, 0.2);
-  color: #ff8ab8; /* Couleur plus claire pour mode sombre */
-  border: 1px solid rgba(255, 107, 181, 0.4);
-}
+    .dark-mode .tech-tag {
+      background: rgba(255, 107, 181, 0.2);
+      color: #ff8ab8;
+      border: 1px solid rgba(255, 107, 181, 0.4);
+    }
 
     /* ================= CONTACT SECTION ================= */
     form { 
@@ -553,90 +553,31 @@
       .btn { padding: 12px 24px; }
       .skills-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    /* Animation pour le spinner */
-.fa-spinner {
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Animation pour les messages */
-.success-message, .error-message {
-  animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+    
+    /* ================= ANIMATIONS ================= */
+    .fa-spinner {
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .success-message, .error-message {
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
   
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<!-- EmailJS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-<script>
-  // Initialise EmailJS avec VOS codes
-  (function() {
-    emailjs.init("f33xJDi-omF0R96bo"); // VOTRE Public Key
-  })();
-  
-  // Gestion du formulaire
-  document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const submitBtn = this.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-    const formMessage = document.getElementById('form-message');
-    const formError = document.getElementById('form-error');
-    
-    // Masquer les messages précédents
-    formMessage.style.display = 'none';
-    formError.style.display = 'none';
-    
-    // Changer le bouton pendant l'envoi
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-    submitBtn.disabled = true;
-    
-    // Envoyer l'email via EmailJS
-    emailjs.sendForm(
-      'service_378stak',      // VOTRE Service ID
-      'template_1n3sarv',     // VOTRE Template ID
-      this
-    )
-    .then(function() {
-      // SUCCÈS
-      submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent!';
-      formMessage.style.display = 'block';
-      
-      // Réinitialiser le formulaire après 4 secondes
-      setTimeout(() => {
-        document.getElementById('contact-form').reset();
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        formMessage.style.display = 'none';
-      }, 4000);
-    })
-    .catch(function(error) {
-      // ERREUR
-      submitBtn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error';
-      formError.style.display = 'block';
-      console.error('EmailJS Error:', error);
-      
-      // Réactiver le bouton après 3 secondes
-      setTimeout(() => {
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        formError.style.display = 'none';
-      }, 3000);
-    });
-  });
-</script>
 <body>
   <!-- NAVBAR -->
   <header>
@@ -644,7 +585,7 @@
       <nav>
         <div class="logo">
           <i class="fas fa-code"></i>
-          <span></span>
+          <span>Soukaina Jouah</span>
         </div>
         
         <div class="nav-links" id="navLinks">
@@ -839,29 +780,31 @@
   </section>
 
   <!-- CONTACT SECTION -->
-<section id="contact">
-  <div class="container">
-    <h2>Contact Me</h2>
-    <form id="contact-form">
-      <input type="text" name="from_name" placeholder="Your Name" required>
-      <input type="email" name="from_email" placeholder="Your Email" required>
-      <input type="text" name="subject" placeholder="Subject (Optional)">
-      <textarea name="message" placeholder="Your Message" required></textarea>
-      <button type="submit" class="btn btn-primary">
-        <i class="fas fa-paper-plane"></i> Send Message
-      </button>
-      
-      <!-- Message de confirmation -->
-      <div id="form-message" class="success-message" style="display: none; margin-top: 20px; padding: 15px; background: rgba(46, 204, 113, 0.1); color: #27ae60; border-radius: 10px; text-align: center;">
-        <i class="fas fa-check-circle"></i> Message sent successfully! I'll respond soon.
-      </div>
-      
-      <div id="form-error" class="error-message" style="display: none; margin-top: 20px; padding: 15px; background: rgba(231, 76, 60, 0.1); color: #c0392b; border-radius: 10px; text-align: center;">
-        <i class="fas fa-exclamation-circle"></i> Error sending message. Please try again or email me directly.
-      </div>
-    </form>
-  </div>
-</section>
+  <section id="contact">
+    <div class="container">
+      <h2>Contact Me</h2>
+      <form id="contact-form">
+        <input type="text" name="from_name" placeholder="Your Name" required>
+        <input type="email" name="from_email" placeholder="Your Email" required>
+        <input type="text" name="subject" placeholder="Subject (Optional)">
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+        
+        <!-- Message de confirmation -->
+        <div id="form-message" class="success-message" style="display: none; margin-top: 20px; padding: 15px; background: rgba(46, 204, 113, 0.1); color: #27ae60; border-radius: 10px; text-align: center;">
+          <i class="fas fa-check-circle"></i> Message sent successfully! I'll respond soon.
+        </div>
+        
+        <div id="form-error" class="error-message" style="display: none; margin-top: 20px; padding: 15px; background: rgba(231, 76, 60, 0.1); color: #c0392b; border-radius: 10px; text-align: center;">
+          <i class="fas fa-exclamation-circle"></i> Error sending message. Please try again or email me directly.
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="logo" style="justify-content: center; margin-bottom: 20px;">
@@ -883,6 +826,9 @@
     </div>
   </footer>
 
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
   <script>
     // TYPEWRITER EFFECT
     const text = "Hello, I'm Soukaina Jouah";
@@ -896,7 +842,17 @@
     }
     
     // Initialize typewriter when page loads
-    document.addEventListener('DOMContentLoaded', typeWriter);
+    document.addEventListener('DOMContentLoaded', function() {
+      typeWriter();
+      
+      // Initialize EmailJS after page loads
+      try {
+        emailjs.init("f33xJDi-omF0R96bo");
+        console.log("✅ EmailJS initialized successfully");
+      } catch (error) {
+        console.error("❌ EmailJS initialization failed:", error);
+      }
+    });
     
     // SCROLL ANIMATION
     const sections = document.querySelectorAll("section");
@@ -982,8 +938,101 @@
       }
     });
     
+    // EMAILJS FORM HANDLING
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      console.log("📧 Form submitted, sending via EmailJS...");
+      
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      const formMessage = document.getElementById('form-message');
+      const formError = document.getElementById('form-error');
+      
+      // Hide previous messages
+      if (formMessage) formMessage.style.display = 'none';
+      if (formError) formError.style.display = 'none';
+      
+      // Show sending state
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+      submitBtn.disabled = true;
+      
+      // Get form data
+      const templateParams = {
+        from_name: this.querySelector('[name="from_name"]').value,
+        from_email: this.querySelector('[name="from_email"]').value,
+        subject: this.querySelector('[name="subject"]').value || 'No subject',
+        message: this.querySelector('[name="message"]').value,
+        to_email: 'soukaina.jouah@example.com' // Remplacez par votre email réel
+      };
+      
+      console.log("Sending data:", templateParams);
+      
+      // Send email using EmailJS
+      emailjs.send('service_378stak', 'template_1n3sarv', templateParams)
+        .then(function(response) {
+          console.log("✅ SUCCESS! Email sent:", response);
+          
+          submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent Successfully!';
+          if (formMessage) {
+            formMessage.style.display = 'block';
+            formMessage.innerHTML = '<i class="fas fa-check-circle"></i> Message sent! I\'ll respond within 24 hours.';
+          }
+          
+          // Reset form after 3 seconds
+          setTimeout(() => {
+            document.getElementById('contact-form').reset();
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            if (formMessage) formMessage.style.display = 'none';
+          }, 3000);
+        })
+        .catch(function(error) {
+          console.error("❌ EmailJS Error:", error);
+          
+          submitBtn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error';
+          if (formError) {
+            formError.style.display = 'block';
+            formError.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${error.text || 'Failed to send message. Please try again.'}`;
+          }
+          
+          // Re-enable button after 3 seconds
+          setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            if (formError) formError.style.display = 'none';
+          }, 3000);
+        });
+    });
+    
     // Trigger initial scroll animation
     scrollAnimation();
+    
+    // Test EmailJS connection
+    function testEmailJS() {
+      console.log("Testing EmailJS connection...");
+      
+      const testData = {
+        from_name: "Test User",
+        from_email: "test@example.com",
+        subject: "Test Email from Portfolio",
+        message: "This is a test message to check if EmailJS is working.",
+        to_email: "soukaina.jouah@example.com"
+      };
+      
+      emailjs.send('service_378stak', 'template_1n3sarv', testData)
+        .then(res => {
+          console.log("✅ Test email sent successfully!", res);
+          alert("Test email sent! Check your inbox.");
+        })
+        .catch(err => {
+          console.error("❌ Test failed:", err);
+          alert("Test failed: " + (err.text || err.message));
+        });
+    }
+    
+    // Uncomment to test EmailJS (optional)
+    // setTimeout(testEmailJS, 3000);
   </script>
 </body>
 </html>
