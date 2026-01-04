@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Checkout — EliteShop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">EliteShop</a>
+    </div>
+  </header>
+
+  <main class="container checkout">
+    <h2>Checkout</h2>
+    <div class="steps">
+      <div id="step1" class="step active">
+        <h3>1 — Livraison</h3>
+        <form id="shippingForm">
+          <input name="name" placeholder="Nom complet" required>
+          <input name="address" placeholder="Adresse" required>
+          <input name="city" placeholder="Ville" required>
+          <div><button class="btn primary" type="submit">Continuer</button></div>
+        </form>
+      </div>
+      <div id="step2" class="step">
+        <h3>2 — Paiement</h3>
+        <form id="paymentForm">
+          <input name="card" placeholder="Numéro carte" required>
+          <input name="exp" placeholder="MM/AA" required>
+          <input name="cvc" placeholder="CVC" required>
+          <div><button class="btn primary" type="submit">Payer</button></div>
+        </form>
+      </div>
+      <div id="step3" class="step">
+        <h3>3 — Confirmation</h3>
+        <p id="orderSummary">Merci ! Votre commande est confirmée.</p>
+        <a href="index.html" class="btn">Retour à l'accueil</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

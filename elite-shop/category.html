@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Catalogue — EliteShop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">EliteShop</a>
+      <nav class="main-nav">
+        <a href="category.html?cat=Hommes">Hommes</a>
+        <a href="category.html?cat=Femmes">Femmes</a>
+        <a href="category.html?cat=Enfants">Enfants</a>
+      </nav>
+      <div class="header-actions">
+        <input id="searchInput" class="search" placeholder="Recherche">
+        <a href="cart.html" class="icon">Panier<span id="cartCount">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="filters">
+      <div class="filter-group">
+        <label>Tri</label>
+        <select id="sortSelect">
+          <option value="default">Par défaut</option>
+          <option value="price-asc">Prix ↑</option>
+          <option value="price-desc">Prix ↓</option>
+          <option value="new">Nouveautés</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Taille</label>
+        <select id="sizeFilter">
+          <option value="all">Toutes</option>
+          <option>XS</option>
+          <option>S</option>
+          <option>M</option>
+          <option>L</option>
+          <option>XL</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Prix max</label>
+        <input id="priceMax" type="range" min="20" max="200" value="200">
+      </div>
+    </section>
+
+    <section>
+      <h2 id="catalogTitle">Tous les produits</h2>
+      <div id="productsGrid" class="grid products-grid"></div>
+    </section>
+  </main>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
